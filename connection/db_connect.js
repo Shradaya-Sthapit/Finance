@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config();
-const DB_URL = 'mongodb://localhost/test';
+const DB_URL = 'mongodb://localhost/task';
 
 const connectDB = () => {
   mongoose

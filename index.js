@@ -1,9 +1,12 @@
 import express, { urlencoded } from "express";
 import cors from "cors";
 import upload from 'express-fileupload'
-import FileRoute from "./routes/fileRoute.js";
+import FileRoute from "./routes/taskRoute.js";
 import connectDB from "./connection/db_connect.js";
 import bodyParser from 'body-parser';
+import cron from "node-cron";
+import shell from "shelljs";
+import Task from "./check.js";
 
 const app = express();
 
@@ -20,8 +23,12 @@ app.get("/", (req, res) => {
   res.send("HELLO WORLD");
 });
 
-app.use("/file", FileRoute);
+app.use("/task", FileRoute);
 
-app.listen(5000);
+app.listen(8080);
 
 connectDB();
+
+cron.schedule("* * * * * *",()=>{
+  Task();
+})
